@@ -1,31 +1,40 @@
 import { useState } from "react";
 
 export default function EmojiPicker(): JSX.Element {
-    const [emojiValueFromCurrentRender, queueRerenderWithNewEmojiValue] = useState<string>();
-    const [storedValueFromCurrentRender, queueRerenderWithNewStoredValue] = useState<string>();
-
-    const handleEmojiToAngel = () => {
-        queueRerenderWithNewEmojiValue("😇");
-    }
-
-    const handleEmojiToMermaid = () => {
-        queueRerenderWithNewEmojiValue("🧜‍♀️");
-    }
-
-    const handleEmojiToAlien = () => {
-        queueRerenderWithNewEmojiValue("👽");
-    }
-
-    const handleEmojiToCat = () => {
-        queueRerenderWithNewEmojiValue("😻");
-    }
+    const [emojiValueFromCurrentRender, queueRerenderWithNewEmojiValue] = 
+    useState<string>();
+    const [storedValueFromCurrentRender, queueRerenderWithNewStoredValue] = 
+    useState<string>();
 
     const handleStoreCurrentEmoji = () => {
         queueRerenderWithNewStoredValue(emojiValueFromCurrentRender);
     }
 
+    const handleEmojiToAngel = () => {
+        queueRerenderWithNewEmojiValue("😇");
+        handleStoreCurrentEmoji(); 
+    }
+
+    const handleEmojiToMermaid = () => {
+        queueRerenderWithNewEmojiValue("🧜‍♀️");
+        handleStoreCurrentEmoji(); 
+    }
+
+    const handleEmojiToAlien = () => {
+        queueRerenderWithNewEmojiValue("👽");
+        handleStoreCurrentEmoji(); 
+    }
+
+    const handleEmojiToCat = () => {
+        queueRerenderWithNewEmojiValue("😻");
+        handleStoreCurrentEmoji(); 
+    }
+
     const handleReset = () => {
-        queueRerenderWithNewEmojiValue("")
+        // resets storedValueFromCurrentRender at "Your stored emoji"
+        queueRerenderWithNewEmojiValue(""); 
+        // resets emojiValueFromCurrentRender at "Current emoji"
+        queueRerenderWithNewStoredValue("");
     }
 
     return (
@@ -38,7 +47,7 @@ export default function EmojiPicker(): JSX.Element {
         <button onClick={handleEmojiToAlien}>👽</button>
         <button onClick={handleEmojiToCat}>😻</button>
         <br />
-        <button onClick={handleStoreCurrentEmoji}>Store current emoji</button>
+        {/* <button onClick={handleStoreCurrentEmoji}>Store current emoji</button> */}
         <button onClick={handleReset}>Reset Counter</button>
       </>
     )
